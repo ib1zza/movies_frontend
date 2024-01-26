@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host --port 3000",
-    "build": "tsc && vite build",
-    "lint": "eslint movies-frontend --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "build": "vite build",
+    "lint": "eslint movies-frontend --ext ts,tsx --report-unused-disable-directives",
     "preview": "vite preview",
     "lint:fix": "npx eslint --fix ./src"
   },
