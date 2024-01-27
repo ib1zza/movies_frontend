@@ -1,6 +1,7 @@
 import {Route, Routes} from "react-router-dom";
 import {AppRoutes} from "@/app/AppRouter/AppRoutes.ts";
 import Homepage from "@pages/Homepage/Homepage.tsx";
+import Header from "@/widgets/Header/Header.tsx";
 
 
 
@@ -14,9 +15,13 @@ const RoutesConfig = [
 
 const AppRouter = () => {
     return (
-        <Routes>
-            {RoutesConfig.map(({path, element}) => <Route key={path} path={path} element={element}/>)}
-        </Routes>
+        <>
+        <Header/>
+            <Routes>
+                {RoutesConfig.map(({path, element}) => <Route key={path} path={path} element={element}/>)}
+            </Routes>
+        </>
+
     );
 };
 

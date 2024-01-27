@@ -1,0 +1,35 @@
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap';
+@import "./themes/light.scss";
+@import "./themes/dark.scss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  background: var(--bgColor);
+  color: var(--textPrimary);
+}
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}

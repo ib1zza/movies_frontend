@@ -10,7 +10,7 @@ export interface ThemeContextProps {
     setTheme: (theme: Theme) => void;
 }
 
-export const LOCAL_STORAGE_THEME_KEY = 'theme';
+export const LOCAL_STORAGE_THEME_KEY = 'movies-tickets-theme';
 
 const defaultTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme || Theme.LIGHT;
 
