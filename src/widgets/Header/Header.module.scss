@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 33px 0;
+  gap: 30px;
+}
+
+.logo {
+  color: var(--textPrimary);
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.rightButtons {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

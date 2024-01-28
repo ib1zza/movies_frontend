@@ -1,0 +1,29 @@
+
+
+.button {
+
+
+
+}
+
+.M {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  //border-radius: 8px;
+  border-radius: 15px;
+
+  font-size: 14px;
+}
+
+.primary {
+  background-color: var(--bgPrimary);
+  color: var(--white);
+}
+
+.accent {
+  background-color: var(--bgAccent);
+  color: var(--white);
+}

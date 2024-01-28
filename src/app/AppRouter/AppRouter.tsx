@@ -16,7 +16,7 @@ const RoutesConfig = [
 const AppRouter = () => {
     return (
         <>
-        <Header/>
+            <Header/>
             <Routes>
                 {RoutesConfig.map(({path, element}) => <Route key={path} path={path} element={element}/>)}
             </Routes>

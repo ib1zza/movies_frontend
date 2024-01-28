@@ -1,10 +1,14 @@
 import React from 'react';
+import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import s from "./SelectCinema.module.scss"
 
 const SelectCinema = () => {
     return (
-        <div>
-            SelectCinema
-        </div>
+        <button className={s.button}>
+            <FontAwesomeIcon icon={faLocationDot} />
+            Выбрать кинотеатр
+        </button>
     );
 };
 
