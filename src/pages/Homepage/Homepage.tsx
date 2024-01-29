@@ -3,15 +3,17 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import s from "./Homepage.module.scss";
 import {useEffect, useState} from "react";
-import {getAllScreeneings} from "@shared/API/API.ts";
+import {getAllScreeneings, getMoviesInfoShort} from "@shared/API/API.ts";
+import { MovieDescriptionShort } from "@/shared/types/types";
+
+
 
 
 const Homepage = () => {
-    const [data, setData] = useState<any[]>([]);
+    const [data, setData] = useState<MovieDescriptionShort[]>([]);
 
     useEffect(() => {
-        // @ts-ignore
-        getAllScreeneings().then(data => setData(data))
+        getAllScreeneings().then(data => getMoviesInfoShort(data.map(s => s.movie_id + ""))).then((res) => setData(res))
     }, [])
 
     console.log(data);
@@ -24,6 +26,8 @@ const Homepage = () => {
             <Text size={"L"}  style={"accent"}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
             </Text>
+
+            {data.map(el => <img src={el.preview_poster_url} />)}
                 </div>
             </div>
         </div>
