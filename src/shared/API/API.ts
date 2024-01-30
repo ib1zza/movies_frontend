@@ -13,16 +13,21 @@ interface getAllScreeneingsResponse {
 }
 
 const getAllScreeneings = async (cinemasIds: number[] = []): Promise<Screening[]> => {
-    const res =  await cinemaApi.get<getAllScreeneingsResponse>("/screenings/movies", {
-        headers: {
-            "Content-Type": "application/json",
-            "cities_ids": cinemasIds.join(","),
-            "start_period.formatted_timestamp": "2023-01-08T20%3A00%3A00Z",
-            "end_period.formatted_timestamp": "2025-01-08T23%3A30%3A00Z"
-        }
-    }).then(response => response.data).catch(() => {
+    const params = new URLSearchParams({
+        // "cities_ids": cinemasIds.join(","),
+        "start_period.formatted_timestamp": "2023-01-08T20:30:00Z",
+        "end_period.formatted_timestamp": "2025-01-08T20:30:00Z"
+    });
+    const res1 =  await fetch(cinemaServiceBaseUrl + "/screenings/movies" + "?" + params).then(response => response.json()).catch(() => {
         return ({"screenings":[{"movie_id":1,"screenings_types":["3d"],"halls_types":["DASDA"]},{"movie_id":2,"screenings_types":["3d"],"halls_types":["DASDA"]}]})
     })
+
+    const res = await cinemaApi.get<getAllScreeneingsResponse>("/screenings/movies", {
+        params: {
+            "start_period.formatted_timestamp": "2023-01-08T20:30:00Z",
+            "end_period.formatted_timestamp": "2025-01-08T20:30:00Z"
+        }
+    }).then(response => response.data);
 
     return res.screenings;
 }
@@ -44,13 +49,17 @@ const getMoviesInfoShort = async (ids: string[] = []): Promise<MovieDescriptionS
     function transformResponce(res: getMoviesInfoResponse) {
         return Object.entries(res.movies).map(([key, value]) => ({...value, id: key}));
     }
-    
+
     const res =  await moviesApi.get<getMoviesInfoResponse>("/movies/preview", {
         headers: {
             "Content-Type": "application/json",
+            // "movies_ids": ids.join(",")
+        },
+        params: {
             "movies_ids": ids.join(",")
         }
-    }).then(response => response.data).catch(() => {
+    }).then(response => response.data).then(() => {
+        console.log("res");
         return ({
             "movies": {
                 "1": {

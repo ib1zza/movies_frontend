@@ -5,6 +5,8 @@ import s from "./Homepage.module.scss";
 import {useEffect, useState} from "react";
 import {getAllScreeneings, getMoviesInfoShort} from "@shared/API/API.ts";
 import { MovieDescriptionShort } from "@/shared/types/types";
+import {CarouselWithFilms} from "@/widgets/CarouselWithFilms/CarouselWithFilms.tsx";
+import {MovieCoverSmall} from "@components/MovieCoverSmall/MovieCoverSmall.tsx";
 
 
 
@@ -26,9 +28,12 @@ const Homepage = () => {
             <Text size={"L"}  style={"accent"}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
             </Text>
-
-            {data.map(el => <img src={el.preview_poster_url} />)}
                 </div>
+
+            <CarouselWithFilms>
+
+                {data.map(el => <MovieCoverSmall movie={el} key={el.id} />)}
+            </CarouselWithFilms>
             </div>
         </div>
     );
