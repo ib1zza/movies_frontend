@@ -11,10 +11,11 @@ interface CarouselWithFilmsProps {
 }
 
 const settings: Settings = {
-    infinite: true,
+    // infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
+    // slidesToShow: 3,
+    slidesToShow: 5,
+    // slidesToScroll: 1,
     easing: "ease-in",
     // dotsClass: s.dotsContainer,
     // pauseOnDotsHover: true,
@@ -24,31 +25,32 @@ const settings: Settings = {
     // pauseOnHover: true,
     dots: false,
     arrows: false,
+    cssEase: "linear",
 
-    responsive: [
-        {
-            breakpoint: 1100,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-            },
-        },
-        {
-            breakpoint: 750,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-            },
-        },
-        {
-            breakpoint: 450,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: false,
-            },
-        },
-    ],
+    // responsive: [
+    //     {
+    //         breakpoint: 1100,
+    //         settings: {
+    //             slidesToShow: 2,
+    //             slidesToScroll: 1,
+    //         },
+    //     },
+    //     {
+    //         breakpoint: 750,
+    //         settings: {
+    //             slidesToShow: 1,
+    //             slidesToScroll: 1,
+    //         },
+    //     },
+    //     {
+    //         breakpoint: 450,
+    //         settings: {
+    //             slidesToShow: 1,
+    //             slidesToScroll: 1,
+    //             arrows: false,
+    //         },
+    //     },
+    // ],
 
     // customPaging: () => <div className={s.dot} />,
 };

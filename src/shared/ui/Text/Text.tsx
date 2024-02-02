@@ -21,7 +21,7 @@ const Text = (props : TextProps) => {
         ...rest
     } = props;
     return (
-        <span className={classNames(s.Text, {[s.bold]: bold, [s.underline]: underline}, [className, s[size], s[style]])} {...rest}>
+        <span className={classNames(s.Text, {[s.bold]: bold, [s.underline]: underline, [s.clickable]: !!rest?.onClick}, [className, s[size], s[style]])} {...rest}>
             {children}
         </span>
     );

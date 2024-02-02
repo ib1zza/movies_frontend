@@ -1,21 +1,38 @@
 
-  
+
   export interface Screening {
     movie_id: number
     screenings_types: string[]
     halls_types: string[]
   }
-  
+
   export interface MovieDescriptionShort {
-    id: string
-    short_description: string
-    title_ru: string
-    title_en: string
+    shortDescription: string
+    titleRu: string
+    titleEn: string
     duration: number
-    preview_poster_url: string
+    previewPosterUrl: string
     countries: string[]
     genres: string[]
-    release_year: number
-    age_rating: string
-  } 
-  
+    releaseYear: number
+    ageRating: string
+    id: string
+  }
+
+
+  export interface City {
+    city_id: number
+    name: string
+  }
+
+  export interface Cinema {
+    cinema_id: number
+    name: string
+    address: string
+    coordinates: Coordinates
+  }
+
+  export interface Coordinates {
+    latityde: number
+    longitude: number
+  }

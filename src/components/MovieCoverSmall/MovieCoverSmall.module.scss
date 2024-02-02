@@ -1,4 +1,29 @@
 .MovieCoverSmall {
-    width: 100%;
-  border-radius: 10px;
+    width: 200px;
+
+  .image {
+      position: relative;
+
+      img {
+          width: 100%;
+          border-radius: 8px;
+      }
+      .rating {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          background: var(--bgAccent);
+          padding: 5px 8px;
+          font-size: 12px;
+          font-weight: bold;
+          border-radius: 5px;
+      }
+  }
+
+    .info {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
 }
