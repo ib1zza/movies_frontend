@@ -49,4 +49,18 @@ const getCinemasByCity = async (cityId: number | string): Promise<Cinema[]> => {
     return res.cinemas;
 }
 
-export {getAllScreenings, getAllCities, getCinemasByCity}
+interface getScreeningsByCinemaResponse {
+    screenings: Screening[];
+}
+
+const getScreeningsByCinema = async (cinemaId: number | string): Promise<Screening[]> => {
+    const res = await cinemaApi.get<getScreeningsByCinemaResponse>(`/cinema/${cinemaId}/screenings/movies`, {
+        params: {
+            "start_period.formatted_timestamp": "2023-01-08T20:30:00Z",
+            "end_period.formatted_timestamp": "2026-01-08T20:30:00Z"
+        }
+    }).then(response => response.data);
+    return res.screenings;
+}
+
+export {getAllScreenings, getAllCities, getCinemasByCity, getScreeningsByCinema}

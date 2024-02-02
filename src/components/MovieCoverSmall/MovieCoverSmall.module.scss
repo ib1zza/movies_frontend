@@ -1,29 +1,56 @@
 .MovieCoverSmall {
-    width: 200px;
+  width: 200px;
+  padding: 5px;
 
   .image {
-      position: relative;
+    position: relative;
+    border-radius: 8px;
 
-      img {
-          width: 100%;
-          border-radius: 8px;
-      }
-      .rating {
-          position: absolute;
-          top: 5px;
-          right: 5px;
-          background: var(--bgAccent);
-          padding: 5px 8px;
-          font-size: 12px;
-          font-weight: bold;
-          border-radius: 5px;
-      }
+    box-shadow: 0 0 5px 0 var(--bgPrimary);
+    transition: .2s ease-in-out;
+
+    overflow: hidden;
+
+    &:hover {
+      transition: .2s ease-in-out;
+      cursor: pointer;
+      box-shadow: 0 0 10px 0 var(--bgAccent);
+    }
+
+    &:hover img {
+      cursor: pointer;
+      transition: .2s ease-in-out;
+
+      -moz-transform: scale(1.05);
+      -webkit-transform: scale(1.05);
+      transform: scale(1.05);
+    }
+
+    img {
+      transition: .2s ease-in-out;
+      -moz-transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+      width: 100%;
+    }
+
+    .rating {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: var(--bgAccent);
+      color: var(--white);
+      padding: 5px 8px;
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
   }
 
-    .info {
-        margin-top: 8px;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
+  .info {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
 }

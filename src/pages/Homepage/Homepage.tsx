@@ -3,11 +3,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import s from "./Homepage.module.scss";
 import {useEffect, useState} from "react";
-import {getMoviesInfoShort} from "@shared/API/API.ts";
 import { MovieDescriptionShort } from "@/shared/types/types";
 import {CarouselWithFilms} from "@/widgets/CarouselWithFilms/CarouselWithFilms.tsx";
 import {MovieCoverSmall} from "@components/MovieCoverSmall/MovieCoverSmall.tsx";
-import {getAllCities, getAllScreenings, getCinemasByCity} from "@shared/API/CinemaService.ts";
+import {getAllScreenings, getCinemasByCity} from "@shared/API/CinemaService.ts";
+import {getMoviesInfoShort} from "@shared/API/MoviesService.ts";
 
 
 

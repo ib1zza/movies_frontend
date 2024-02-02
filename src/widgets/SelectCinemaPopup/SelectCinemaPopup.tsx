@@ -5,6 +5,8 @@ import {Text} from "@shared/ui/Text/Text.tsx";
 import {cinemaActions} from "@app/Store/config/slices/cinemaSlice.ts";
 import {Cinema, City} from "@shared/types/types.ts";
 import {getCinemasByCity} from "@shared/API/CinemaService.ts";
+import {useNavigate} from "react-router-dom";
+import {AppRoutes} from "@app/AppRouter/AppRoutes.ts";
 
 interface SelectCinemaPopupProps {
     className?: string;
@@ -28,8 +30,11 @@ const SelectCinemaPopup = ({className, onClose} : SelectCinemaPopupProps) => {
         }
     }
 
+    const navigate = useNavigate();
+
     function onSelectCinema(cinema: Cinema) {
         dispatch(cinemaActions.setSelectedCinema(cinema));
+        navigate(AppRoutes.CINEMA + `/${cinema.cinema_id}`);
         onClose();
     }
 
@@ -45,7 +50,10 @@ const SelectCinemaPopup = ({className, onClose} : SelectCinemaPopupProps) => {
                 </div>
                 <div className={s.cinemasSelector}>
                     {cinemas.map(cinema => (
-                        <Text size={"S"} style={"white"} onClick={() => onSelectCinema(cinema)} key={cinema.cinema_id}>{cinema.name}</Text>
+                        <div className={s.singleCinema}  key={cinema.cinema_id}>
+                        <Text size={"S"} style={"white"} onClick={() => onSelectCinema(cinema)}>{cinema.name}</Text>
+                            <Text className={s.address} size={"XS"} style={"white"}>Адрес: {cinema.address}</Text>
+                        </div>
                     ))}
                 </div>
             </div>

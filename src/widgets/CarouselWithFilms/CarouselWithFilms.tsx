@@ -11,7 +11,7 @@ interface CarouselWithFilmsProps {
 }
 
 const settings: Settings = {
-    // infinite: true,
+    infinite: false,
     speed: 500,
     // slidesToShow: 3,
     slidesToShow: 5,

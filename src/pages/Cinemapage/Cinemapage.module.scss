@@ -1,0 +1,19 @@
+.cinemaInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: space-between;
+  .address {
+    svg {
+      margin-right: 8px;
+    }
+    opacity: .8;
+  }
+
+
+}
+
+.carousel {
+  margin-top: 40px;
+}
