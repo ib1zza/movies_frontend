@@ -11,7 +11,7 @@ import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 import {CarouselWithFilms} from "@/widgets/CarouselWithFilms/CarouselWithFilms.tsx";
 import {screeningsActions} from "@app/Store/config/slices/screeningsSlice.ts";
 import {
-    getAviableMoviesByCinema,
+    getAviableMoviesByCinema, getCinemaById,
     getScreeningsByCinema,
     getScreeningsByMovieByCinema
 } from "@shared/API/CinemaService.ts";
@@ -24,24 +24,33 @@ interface CinemapageProps {
     className?: string
 }
 const Cinemapage = ({className} : CinemapageProps) => {
-    // const {cinemaId} = useParams();
+    const {cinemaId} = useParams();
     const {selectedCinema} = useAppSelector(state => state.cinema);
     const {selectedCinemaScreenings, selectedCinemaId} = useAppSelector(state => state.screenings)
     const dispatch = useDispatch();
     const [movies, setMovies] = useState<MovieDescriptionShort[]>([]);
 
     useEffect(() => {
-        if(!selectedCinema) return;
+        if(!selectedCinema && cinemaId) {
+            getCinemaById(cinemaId).then(res => {
+                console.log(res);
+                dispatch(cinemaActions.setSelectedCinema(res));
+                dispatch(screeningsActions.setSelectedCinemaId(res.cinema_id));
+            })
+        }
+        if (!selectedCinema) return;
+
+        if (!selectedCinemaId) {
+            dispatch(screeningsActions.setSelectedCinemaId(selectedCinema.cinema_id))
+        }
         // if (selectedCinemaId === selectedCinema.cinema_id) return;
 
+        console.log(selectedCinema.name)
         getAviableMoviesByCinema(selectedCinema.cinema_id).then(res => {
             getMoviesInfoShort(res.map(s => String(s.movie_id))).then(setMovies);
-            getScreeningsByMovieByCinema(selectedCinemaId || 0, res[0].movie_id).then(res => {
-console.log(res)
-            })
             dispatch(screeningsActions.setScreeningsByCinema({[selectedCinema.cinema_id]: res}));
             dispatch(screeningsActions.setSelectedCinemaId(selectedCinema.cinema_id));
-        })
+        }).catch(err => console.log(err))
 
         // if (!cinemaId) return;
         // TODO: query for cinema/:cinemaId to prevent losing data after page refresh

@@ -49,6 +49,11 @@ const getCinemasByCity = async (cityId: number | string): Promise<Cinema[]> => {
     return res.cinemas;
 }
 
+const getCinemaById = async (cinemaId: number | string): Promise<Cinema> => {
+    const res = await cinemaApi.get<Cinema>(`/cinema/${cinemaId}`).then(response => response.data);
+    return res;
+}
+
 interface getScreeningsByCinemaResponse {
     screenings: ScreeningOverview[];
 }
@@ -79,4 +84,4 @@ const getScreeningsByMovieByCinema = async (cinemaId: number | string, movieId: 
 }
 
 
-export {getAllScreenings, getAllCities, getCinemasByCity, getScreeningsByMovieByCinema, getAviableMoviesByCinema}
+export {getAllScreenings, getAllCities, getCinemaById, getCinemasByCity, getScreeningsByMovieByCinema, getAviableMoviesByCinema}
