@@ -17,6 +17,11 @@ function formatTime(time: string) {
     return `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`
 }
 
+function formatPrice(price: number) {
+    const rub = price.toString().slice(0, -2);
+    return `${rub} ₽`
+}
+
 const MovieWithScreenings = ({className, movie, cinemaId} : MovieWithScreeningsProps) => {
     const [screenings, setScreenings] = useState<Screening[]>([]);
 
@@ -32,7 +37,7 @@ const MovieWithScreenings = ({className, movie, cinemaId} : MovieWithScreeningsP
                 {screenings.map(screening => (
                     <div className={s.screening} key={screening.screening_id}>
                         <Text size={"M"} style={"default"}>{formatTime(screening.start_time.formatted_timestamp)}</Text>
-                        <Text size={"S"} style={"accent"}>от {screening.ticket_price.value}₽</Text>
+                        <Text size={"S"} style={"accent"}>от {formatPrice(screening.ticket_price.value)}</Text>
                     </div>
                 ))}
             </div>

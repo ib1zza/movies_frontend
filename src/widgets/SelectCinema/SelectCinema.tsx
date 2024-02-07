@@ -34,7 +34,7 @@ const SelectCinema = () => {
             dispatch(cinemaActions.setSelectedCity(res.selectedCity));
             dispatch(cinemaActions.setCinemasByCity({[res.selectedCity.city_id]: res.cinemasByCity}));
         })
-    }, [])
+    }, []);
 
     return (
         <div className={s.wrapper}>
