@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Screening, City, Cinema} from "@shared/types/types.ts";
+import {ScreeningOverview, City, Cinema, Screening} from "@shared/types/types.ts";
 import {baseUrl} from "./API.ts";
 
 const cinemaServiceBaseUrl = baseUrl + "/cinema-service";
@@ -8,10 +8,10 @@ const cinemaApi = axios.create({
     baseURL: cinemaServiceBaseUrl,
 })
 interface getAllScreeningsResponse {
-    screenings: Screening[];
+    screenings: ScreeningOverview[];
 }
 
-const getAllScreenings = async (cinemasIds: number[] = []): Promise<Screening[]> => {
+const getAllScreenings = async (cinemasIds: number[] = []): Promise<ScreeningOverview[]> => {
     const params = new URLSearchParams({
         // "cities_ids": cinemasIds.join(","),
         "start_period.formatted_timestamp": "2023-01-08T20:30:00Z",
@@ -50,10 +50,10 @@ const getCinemasByCity = async (cityId: number | string): Promise<Cinema[]> => {
 }
 
 interface getScreeningsByCinemaResponse {
-    screenings: Screening[];
+    screenings: ScreeningOverview[];
 }
 
-const getScreeningsByCinema = async (cinemaId: number | string): Promise<Screening[]> => {
+const getAviableMoviesByCinema = async (cinemaId: number | string): Promise<ScreeningOverview[]> => {
     const res = await cinemaApi.get<getScreeningsByCinemaResponse>(`/cinema/${cinemaId}/screenings/movies`, {
         params: {
             "start_period.formatted_timestamp": "2023-01-08T20:30:00Z",
@@ -63,4 +63,20 @@ const getScreeningsByCinema = async (cinemaId: number | string): Promise<Screeni
     return res.screenings;
 }
 
-export {getAllScreenings, getAllCities, getCinemasByCity, getScreeningsByCinema}
+interface getScreeningsByMovieByCinemaResponse {
+    screenings: Screening[];
+}
+
+const getScreeningsByMovieByCinema = async (cinemaId: number | string, movieId: number | string): Promise<Screening[]> => {
+    const res = await cinemaApi.get<getScreeningsByMovieByCinemaResponse>(`/cinema/${cinemaId}/screenings`, {
+        params: {
+            "movie_id": movieId,
+            "start_period.formatted_timestamp": "2023-01-08T20:30:00Z",
+            "end_period.formatted_timestamp": "2026-01-08T20:30:00Z"
+        }
+    }).then(response => response.data);
+    return res.screenings;
+}
+
+
+export {getAllScreenings, getAllCities, getCinemasByCity, getScreeningsByMovieByCinema, getAviableMoviesByCinema}

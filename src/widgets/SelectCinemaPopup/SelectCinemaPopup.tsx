@@ -44,7 +44,7 @@ const SelectCinemaPopup = ({className, onClose} : SelectCinemaPopupProps) => {
         <div className={classNames(s.SelectCinemaPopup, {}, [className])}>
             <div className={s.wrapper}>
                 <div className={s.citiesSelector}>
-                    {allCities.map(city => (
+                    {[...allCities].sort((a, b) => a.name.localeCompare(b.name)).map(city => (
                         <Text bold={selectedCity?.city_id === city.city_id} size={"M"} style={"accent"} onClick={() => onSelectCity(city)} key={city.city_id}>{city.name}</Text>
                     ))}
                 </div>

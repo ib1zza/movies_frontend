@@ -2,11 +2,9 @@ import {Route, Routes} from "react-router-dom";
 import {AppRoutes} from "@/app/AppRouter/AppRoutes.ts";
 import Homepage from "@pages/Homepage/Homepage.tsx";
 import Header from "@/widgets/Header/Header.tsx";
-import { Cinemapage } from "@/pages/Cinemapage/Cinemapage";
+import {Cinemapage} from "@/pages/Cinemapage/Cinemapage";
+import s from "./AppRouter.module.scss";
 
-
-
-// @ts-ignore
 const RoutesConfig = [
     {
         path: AppRoutes.HOMEPAGE,
@@ -20,12 +18,9 @@ const RoutesConfig = [
 
 const AppRouter = () => {
     return (
-        <>
-            <Header/>
-            <Routes>
-                {RoutesConfig.map(({path, element}) => <Route key={path} path={path} element={element}/>)}
-            </Routes>
-        </>
+        <Routes>
+            {RoutesConfig.map(({path, element}) => <Route key={path} path={path} element={element}/>)}
+        </Routes>
 
     );
 };

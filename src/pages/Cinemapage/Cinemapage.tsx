@@ -10,10 +10,15 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 import {CarouselWithFilms} from "@/widgets/CarouselWithFilms/CarouselWithFilms.tsx";
 import {screeningsActions} from "@app/Store/config/slices/screeningsSlice.ts";
-import {getScreeningsByCinema} from "@shared/API/CinemaService.ts";
+import {
+    getAviableMoviesByCinema,
+    getScreeningsByCinema,
+    getScreeningsByMovieByCinema
+} from "@shared/API/CinemaService.ts";
 import {MovieCoverSmall} from "@components/MovieCoverSmall/MovieCoverSmall.tsx";
 import {MovieDescriptionShort} from "@shared/types/types.ts";
 import {getMoviesInfoShort} from "@shared/API/MoviesService.ts";
+import {MovieWithScreenings} from "@/widgets/MovieWithScreenings/MovieWithScreenings.tsx";
 
 interface CinemapageProps {
     className?: string
@@ -29,8 +34,11 @@ const Cinemapage = ({className} : CinemapageProps) => {
         if(!selectedCinema) return;
         // if (selectedCinemaId === selectedCinema.cinema_id) return;
 
-        getScreeningsByCinema(selectedCinema.cinema_id).then(res => {
-            getMoviesInfoShort(res.map(s => s.movie_id + "")).then(setMovies);
+        getAviableMoviesByCinema(selectedCinema.cinema_id).then(res => {
+            getMoviesInfoShort(res.map(s => String(s.movie_id))).then(setMovies);
+            getScreeningsByMovieByCinema(selectedCinemaId || 0, res[0].movie_id).then(res => {
+console.log(res)
+            })
             dispatch(screeningsActions.setScreeningsByCinema({[selectedCinema.cinema_id]: res}));
             dispatch(screeningsActions.setSelectedCinemaId(selectedCinema.cinema_id));
         })
@@ -40,9 +48,9 @@ const Cinemapage = ({className} : CinemapageProps) => {
         // dispatch(cinemaActions.setSelectedCinema())
     }, [selectedCinema?.cinema_id])
 
-    if (!selectedCinema) return null;
+    if (!selectedCinema || !selectedCinemaId) return null;
 
-    console.log(selectedCinema)
+    console.log(selectedCinemaScreenings)
     return (
         <div className={classNames(s.Cinemapage, {}, [className])}>
             <div className={s.cinemaInfo}>
@@ -53,11 +61,14 @@ const Cinemapage = ({className} : CinemapageProps) => {
                     Адрес: {selectedCinema.address}</Text>
             </div>
 
-            <CarouselWithFilms className={s.carousel}>
+            <div className={s.carousel}>
                 {movies.map(movie => (
-                    <MovieCoverSmall movie={movie} key={movie.id} />
+                    <div className={s.movieWithScreenings}>
+                        <MovieWithScreenings key={movie.id} movie={movie} cinemaId={selectedCinemaId}/>
+                        {/*<MovieCoverSmall movie={movie} key={movie.id} />*/}
+                    </div>
                 ))}
-            </CarouselWithFilms>
+            </div>
         </div>
     );
 };

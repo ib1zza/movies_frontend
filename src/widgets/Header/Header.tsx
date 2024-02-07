@@ -5,24 +5,25 @@ import {ThemeSwitcher} from "@/widgets/ThemeSwitcher/ThemeSwitcher.tsx";
 import Button from "@shared/ui/Button/Button.tsx";
 import {useNavigate} from "react-router-dom";
 import {AppRoutes} from "@app/AppRouter/AppRoutes.ts";
+import {Wrapper} from "@shared/ui/Wrapper/Wrapper.tsx";
 
 const Header = () => {
     const navigate = useNavigate()
     return (
-        <header className={s.header}>
-            <div className={s.logo} onClick={() => navigate(AppRoutes.HOMEPAGE)}>
-                {AppName}
-            </div>
-            <div className={s.selectCinema}>
-                <SelectCinema/>
-            </div>
-            <div className={s.rightButtons}>
-               <ThemeSwitcher/>
-                <Button style={"accent"}>
-                    Личный кабинет
-                </Button>
-            </div>
-        </header>
+            <Wrapper className={s.header}>
+                <div className={s.logo} onClick={() => navigate(AppRoutes.HOMEPAGE)}>
+                    {AppName}
+                </div>
+                <div className={s.selectCinema}>
+                    <SelectCinema/>
+                </div>
+                <div className={s.rightButtons}>
+                    <ThemeSwitcher/>
+                    <Button style={"accent"}>
+                        Личный кабинет
+                    </Button>
+                </div>
+            </Wrapper>
     );
 };
 

@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Screening} from "@shared/types/types.ts";
+import { ScreeningOverview} from "@shared/types/types.ts";
 
 interface ScreeningsSchema {
     isLoading: boolean;
     error: string;
-    allScreenings: Screening[];
+    allScreenings: ScreeningOverview[];
     // key - cinema_id value - array of screenings
-    screeningsByCinema: Record<string, Screening[]>;
-    selectedCinemaScreenings: Screening[];
+    screeningsByCinema: Record<string, ScreeningOverview[]>;
+    selectedCinemaScreenings: ScreeningOverview[];
     selectedCinemaId: number | null;
     // selectedCinemaId: Cinema | null;
 }
@@ -25,13 +25,13 @@ export const screeningsSlice = createSlice({
     name: 'screenings',
     initialState,
     reducers: {
-        setScreenings: (state, action: PayloadAction<Screening[]>) => {
+        setScreenings: (state, action: PayloadAction<ScreeningOverview[]>) => {
             state.allScreenings = action.payload;
         },
-        setScreeningsByCinema: (state, action: PayloadAction<Record<string, Screening[]>>) => {
+        setScreeningsByCinema: (state, action: PayloadAction<Record<string, ScreeningOverview[]>>) => {
             state.screeningsByCinema = {...state.screeningsByCinema, ...action.payload};
         },
-        setSelectedCinemaScreenings: (state, action: PayloadAction<Screening[]>) => {
+        setSelectedCinemaScreenings: (state, action: PayloadAction<ScreeningOverview[]>) => {
             state.selectedCinemaScreenings = action.payload;
         },
         setSelectedCinemaId: (state, action: PayloadAction<number | null>) => {

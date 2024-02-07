@@ -1,10 +1,46 @@
 
 
-  export interface Screening {
+  export interface ScreeningOverview {
     movie_id: number
     screenings_types: string[]
     halls_types: string[]
   }
+
+  export interface Screening {
+    screening_id: string
+    movie_id: number
+    screening_type: string
+    start_time: StartTime
+    hall_id: number
+    ticket_price: TicketPrice
+  }
+
+  export interface StartTime {
+    formatted_timestamp: string
+  }
+
+  export interface TicketPrice {
+    value: number
+  }
+
+
+  export interface Root {
+    screening_id: string
+    movie_id: number
+    screening_type: string
+    start_time: StartTime
+    hall_id: number
+    ticket_price: TicketPrice
+  }
+
+  export interface StartTime {
+    formatted_timestamp: string
+  }
+
+  export interface TicketPrice {
+    value: number
+  }
+
 
   export interface MovieDescriptionShort {
     shortDescription: string
