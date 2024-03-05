@@ -72,3 +72,27 @@
     latityde: number
     longitude: number
   }
+
+  export interface ScreeningInfo {
+    cinema_id: number
+    movie_id: number
+    screening_type: string
+    start_time: StartTime
+    hall_id: number
+    ticket_price: TicketPrice
+    hall_configuration: HallConfiguration
+  }
+
+  export interface HallConfiguration {
+    place: PlaceWithCoords[]
+  }
+
+  export interface Place {
+    row: number
+    seat: number
+  }
+
+  export interface PlaceWithCoords extends Place {
+    gridPosX: number
+    gridPosY: number
+  }

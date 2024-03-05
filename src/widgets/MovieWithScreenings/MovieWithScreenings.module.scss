@@ -4,23 +4,6 @@
   align-items: flex-start;
 }
 
-.screening {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex-direction: column;
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: 1px solid var(--bgPrimary);
-  transition: .2s ease-in-out;
-  cursor: pointer;
-  &:hover {
-    box-shadow: 0 0 10px 0 var(--bgPrimary);
-    border: 1px solid var(--bgPrimary);
-    transition: .2s ease-in-out;
-
-  }
-}
 
 .screenings {
   display: flex;

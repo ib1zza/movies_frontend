@@ -1,0 +1,200 @@
+.PopupBuyTickets {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .content {
+    padding: 20px;
+    border-radius: 20px;
+    background: var(--bgColor);
+  }
+}
+
+.placesContainer {
+  min-width: 280px;
+
+  .screen {
+    text-align: center;
+    border-radius: 50% / 15px;
+    padding: 15px ;
+    background: var(--bgPrimary);
+    width: 100%;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .screen::after {
+    position: absolute;
+    box-sizing: border-box;
+    content: "";
+    top: 7px;
+    left: 0px;
+    right: 0;
+    background: var(--bgColor);
+    width: 100%;
+    padding: 15px;
+    border-radius: 50% / 15px;
+  }
+
+  .places {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .rowContainer {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+    .rowContainerNumber {
+      width: 30px;
+      text-align: center;
+      opacity: 0.4;
+    }
+
+    .placeRow {
+      display: grid;
+      gap: 5px;
+    }
+    &:hover {
+      .rowContainerNumber {
+        opacity: 1;
+      }
+    }
+  }
+
+  .placeRow {
+    display: grid;
+    gap: 5px;
+  }
+
+  .place {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background: var(--bgPrimary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+
+    &.occupied {
+      opacity: 0.5;
+
+      &:hover {
+        cursor: default;
+        opacity: 0.5;
+      }
+    }
+
+    &.selected {
+      background: var(--bgAccent);
+    }
+  }
+}
+
+.placesDescription {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  &>* {
+    display: flex;
+    align-items: center;
+    gap: 10px
+  }
+
+  span {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .freePlace {
+    span {
+      background: var(--bgPrimary);
+    }
+  }
+
+  .occupiedPlace {
+    span {
+      background: var(--bgPrimary);
+      opacity: 0.6;
+    }
+  }
+
+  .selectedPlace {
+    span {
+      background: var(--bgAccent);
+    }
+  }
+
+
+}
+
+.filmInfo {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.image {
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+
+.infoTop {
+  display: flex;
+  gap: 5px;
+}
+
+.screeningType {
+  background: var(--bgPrimary);
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.ageRating {
+  background: var(--bgAccent);
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+}

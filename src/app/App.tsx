@@ -4,6 +4,7 @@ import {classNames} from "@shared/lib/classNames.ts";
 import AppRouter from "@/app/AppRouter/AppRouter.tsx";
 import {Wrapper} from "@shared/ui/Wrapper/Wrapper.tsx";
 import Header from "@/widgets/Header/Header.tsx";
+import {PopupBuyTickets} from "@/widgets/PopupBuyTickets/PopupBuyTickets.tsx";
 
 function App() {
     const {theme} = useTheme();
@@ -17,6 +18,8 @@ function App() {
                     <AppRouter/>
                 </div>
             </Wrapper>
+
+            <PopupBuyTickets/>
         </div>
     )
 }
