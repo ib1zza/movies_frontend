@@ -3,6 +3,7 @@ import {classNames} from "@shared/lib/classNames.ts";
 import {useAppDispatch, useAppSelector} from "@app/Store/config/store.ts";
 import {PlaceWithCoords} from "@shared/types/types.ts";
 import {reservationActions} from "@app/Store/config/slices/reservationSlice.ts";
+import Button from "@shared/ui/Button/Button.tsx";
 
 interface PopupBuyTicketsProps {
     className?: string;
@@ -31,13 +32,35 @@ function formatPlaces(places: PlaceWithCoords[]) {
     return {places: res, totalRows, totalColumns};
 }
 
-const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
-    const {selectedScreeningInfo, selectedScreening, occupiedSeats, selectedMovie, selectedPlaces} = useAppSelector(state => state.reservation)
-    const {selectedCinema} = useAppSelector(state => state.cinema);
+function formatPlacesCount(num: number) {
+    switch (num) {
+        case 1:
+            return "1 место";
+        case 2:
+            return "2 места";
+        case 3:
+            return "3 места";
+        case 4:
+            return "4 места";
+        default:
+            return `${num} мест`;
+    }
+}
 
+const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
+    const {
+        selectedScreeningInfo,
+        selectedScreening,
+        occupiedSeats,
+        selectedMovie,
+        selectedPlaces,
+        totalPrice,
+        error
+    } = useAppSelector(state => state.reservation)
+    const {selectedCinema} = useAppSelector(state => state.cinema);
     const dispatch = useAppDispatch();
 
-    if (!selectedScreening || !selectedScreeningInfo || !selectedMovie || !selectedCinema ) return null;
+    if (!selectedScreening || !selectedScreeningInfo || !selectedMovie || !selectedCinema) return null;
 
     function handleSelectPlace(place: PlaceWithCoords) {
         dispatch(reservationActions.selectPlace(place));
@@ -75,7 +98,10 @@ const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
                                     <div
                                         key={seat.seat}
                                         onClick={() => handleSelectPlace(seat)}
-                                        className={classNames(s.place, {[s.occupied]: occupiedSeats.some(el => el.row === +row && el.seat === +seat.seat), [s.selected]:  selectedPlaces.some(el => el.row === +row && el.seat === +seat.seat)})}
+                                        className={classNames(s.place, {
+                                            [s.occupied]: occupiedSeats.some(el => el.row === +row && el.seat === +seat.seat),
+                                            [s.selected]: selectedPlaces.some(el => el.row === +row && el.seat === +seat.seat)
+                                        })}
                                         style={{gridColumn: seat.gridPosX}}
                                     >
                                         {seat.seat}
@@ -90,6 +116,19 @@ const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
                 <div className={s.freePlace}><span>1</span> Свободное место</div>
                 <div className={s.occupiedPlace}><span>1</span> Занятое место</div>
                 <div className={s.selectedPlace}><span>1</span> Выбранное место</div>
+            </div>
+            <div className={s.total}>
+                {
+                    selectedPlaces.length ? (
+                            <div className={s.totalContainer}>
+                                {error && <div className={s.totalError}>{error}</div>}
+                                <div className={s.totalCount}>{formatPlacesCount(selectedPlaces.length)}</div>
+                                <div className={s.totalPrice}>{totalPrice} ₽</div>
+                                <Button style={"accent"} className={s.nextButton}>Далее</Button>
+                            </div>
+                        ) :
+                        <div className={s.totalEmpty}>Корзина пуста</div>
+                }
             </div>
         </div>
     </div>);

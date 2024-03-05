@@ -77,37 +77,39 @@
     gap: 5px;
   }
 
-  .place {
-    width: 30px;
-    height: 30px;
-    border-radius: 10px;
-    background: var(--bgPrimary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    font-size: 12px;
-    font-weight: 700;
+}
+
+.place {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--bgPrimary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
+  &.occupied {
+    opacity: 0.5;
 
     &:hover {
-      cursor: pointer;
-      opacity: 0.7;
-    }
-
-    &.occupied {
+      cursor: default;
       opacity: 0.5;
-
-      &:hover {
-        cursor: default;
-        opacity: 0.5;
-      }
-    }
-
-    &.selected {
-      background: var(--bgAccent);
     }
   }
+
+  &.selected {
+    background: var(--bgAccent);
+  }
 }
+
 
 .placesDescription {
   margin-top: 15px;
@@ -197,4 +199,39 @@
   font-size: 12px;
   font-weight: 700;
   color: var(--white);
+}
+
+.totalContainer {
+  //flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.totalPrice {
+  font-weight: bold;
+}
+
+.total {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.totalError {
+  color: red;
+}
+
+@media screen and (max-width: 650px) {
+  .place {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .rowContainerNumber {
+    width: 20px;
+    font-size: 14px;
+  }
 }
