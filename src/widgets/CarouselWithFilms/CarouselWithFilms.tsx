@@ -13,44 +13,42 @@ interface CarouselWithFilmsProps {
 const settings: Settings = {
     infinite: false,
     speed: 500,
-    // slidesToShow: 3,
     slidesToShow: 5,
-    // slidesToScroll: 1,
-    easing: "ease-in",
-    // dotsClass: s.dotsContainer,
-    // pauseOnDotsHover: true,
-    // autoplay: true,
+    slidesToScroll: 2,
+    rows: 1,
 
-    // autoplaySpeed: 2500,
-    // pauseOnHover: true,
+    easing: "ease-in",
     dots: false,
     arrows: false,
     cssEase: "linear",
 
-    // responsive: [
-    //     {
-    //         breakpoint: 1100,
-    //         settings: {
-    //             slidesToShow: 2,
-    //             slidesToScroll: 1,
-    //         },
-    //     },
-    //     {
-    //         breakpoint: 750,
-    //         settings: {
-    //             slidesToShow: 1,
-    //             slidesToScroll: 1,
-    //         },
-    //     },
-    //     {
-    //         breakpoint: 450,
-    //         settings: {
-    //             slidesToShow: 1,
-    //             slidesToScroll: 1,
-    //             arrows: false,
-    //         },
-    //     },
-    // ],
+    responsive: [
+        {
+            breakpoint: 1100,
+            settings: {
+                slidesToShow: 4,
+                slidesToScroll: 1,
+            },
+        },
+        {
+            breakpoint: 900,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+            },
+        },
+        {
+            breakpoint: 700,
+            settings: {
+                // initialSlide: 0,
+                // slidesPerRow: 2,
+                // rows: 1,
+                slidesToShow: 2,
+                slidesToScroll: 1,
+            },
+        },
+    ],
+
 
     // customPaging: () => <div className={s.dot} />,
 };
@@ -58,7 +56,7 @@ const settings: Settings = {
 const CarouselWithFilms = ({className, children} : CarouselWithFilmsProps) => {
     return (
         <div className={classNames(s.CarouselWithFilms, {}, [className])}>
-            <Slider {...settings}>
+            <Slider {...settings} className={s.slider}>
                 {
                     children
                 }

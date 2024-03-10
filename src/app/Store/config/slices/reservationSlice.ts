@@ -73,6 +73,10 @@ export const reservationSlice = createSlice({
             state.selectedScreeningInfo = null;
             state.hallConfiguration = null;
             state.occupiedSeats = [];
+            state.error = "";
+            state.selectedMovie = null;
+            state.selectedPlaces = [];
+            state.totalPrice = 0;
         }
     },
 });
