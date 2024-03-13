@@ -33,9 +33,14 @@ const Register = ({className}: RegisterProps) => {
 
     async function onRegister(data: RegisterData) {
         console.log(data);
-        // const res = signUp(data);
-        const res2 = await verifyEmail(data.email)
-        console.log(res2)
+        try {
+            const res1 = await signUp(data);
+            const res2 = await verifyEmail(data.email);
+            console.log(res1, res2)
+        } catch (err) {
+            console.log(err)
+        }
+
     }
 
     const password = watch("password");
@@ -64,7 +69,7 @@ const Register = ({className}: RegisterProps) => {
                 <Input {...register("password", {required: {
                         value: true,
                         message: "Поле обязательно для заполнения"
-                    }, minLength: 6, maxLength: 20,})} type="password"
+                    }, minLength: 7, maxLength: 31,})} type="password"
                        placeholder="Пароль" error={errors.password} label="Пароль"/>
                 <Input {...register("repeat_password", {
                     deps: "password",
