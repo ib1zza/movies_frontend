@@ -3,6 +3,8 @@ import {AppRoutes} from "@/app/AppRouter/AppRoutes.ts";
 import Homepage from "@pages/Homepage/Homepage.tsx";
 import {Cinemapage} from "@/pages/Cinemapage/Cinemapage";
 import {MoviepageByCinema} from "@pages/MoviepageByCinema/MoviepageByCinema.tsx";
+import {Login} from "@pages/Auth/Login/Login.tsx";
+import {Register} from "@pages/Auth/Register/Register.tsx";
 
 const RoutesConfig = [
     {
@@ -18,6 +20,14 @@ const RoutesConfig = [
         element: <MoviepageByCinema/>
     },
     {
+        path: AppRoutes.LOGIN,
+        element: <Login/>
+    },
+    {
+        path: AppRoutes.REGISTER,
+        element: <Register/>
+    },
+    {
         path: "*",
         element: <Homepage/>
     }
@@ -28,7 +38,6 @@ const AppRouter = () => {
         <Routes>
             {RoutesConfig.map(({path, element}) => <Route key={path} path={path} element={element}/>)}
         </Routes>
-
     );
 };
 

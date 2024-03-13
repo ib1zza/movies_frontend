@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+
+  button {
+    padding: 10px;
+    //border: 1px solid var(--textPrimary);
+    background: var(--bgAccent);
+    border-radius: 5px;
+    margin-top: 10px;
+
+    &:hover {
+      opacity: .7;
+    }
+  }
+
+}
+
+.title {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.bottomText {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.link {
+  color: var(--textAccent);
+  //text-decoration: none;
+
+  &:hover {
+    opacity: .7;
+  }
+}

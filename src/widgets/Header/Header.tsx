@@ -20,7 +20,7 @@ const Header = () => {
             </div>
             <div className={s.rightButtons}>
                 <ThemeSwitcher/>
-                <Button style={"accent"}>
+                <Button style={"accent"} onClick={() => navigate(AppRoutes.REGISTER)}>
                     Личный кабинет
                 </Button>
             </div>

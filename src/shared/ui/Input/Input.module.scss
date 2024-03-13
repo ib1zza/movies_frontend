@@ -1,0 +1,25 @@
+.Input {
+  width: 100%;
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--textPrimary);
+    border-radius: 5px;
+
+    &.error {
+      border-color: var(--textAccent);
+    }
+  }
+
+  .errorMessage {
+    color: var(--textAccent);
+    font-size: 12px;
+  }
+
+  .label {
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+}

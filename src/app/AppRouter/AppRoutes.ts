@@ -1,4 +1,6 @@
 export const enum AppRoutes {
     "HOMEPAGE"= "/",
     "CINEMA" = "/cinema",
+    "LOGIN" = "/login",
+    "REGISTER" = "/register",
 }

@@ -10,10 +10,21 @@
   align-items: center;
   z-index: 1000;
 
+
+
   .content {
     padding: 20px;
     border-radius: 20px;
     background: var(--bgColor);
+    position: relative;
+
+    .closeButton {
+      position: absolute;
+      right: 0px;
+      top: 0;
+      font-size: 20px;
+      padding: 10px;
+    }
   }
 }
 

@@ -4,6 +4,8 @@ import {useAppDispatch, useAppSelector} from "@app/Store/config/store.ts";
 import {PlaceWithCoords} from "@shared/types/types.ts";
 import {reservationActions} from "@app/Store/config/slices/reservationSlice.ts";
 import Button from "@shared/ui/Button/Button.tsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
 
 interface PopupBuyTicketsProps {
     className?: string;
@@ -66,9 +68,13 @@ const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
         dispatch(reservationActions.selectPlace(place));
     }
 
+    function handleOnClose() {
+        dispatch(reservationActions.unselectScreening());
+    }
+
     const {places, totalRows, totalColumns} = formatPlaces(selectedScreeningInfo.hall_configuration.place);
-    return (<div className={classNames(s.PopupBuyTickets, {}, [className])}>
-        <div className={s.content}>
+    return (<div className={classNames(s.PopupBuyTickets, {}, [className])} onClick={handleOnClose}>
+        <div className={s.content} onClick={e => e.stopPropagation()}>
             <div className={s.filmInfo}>
                 <img className={s.image} src={selectedMovie.previewPosterUrl} alt="poster"/>
                 <div className={s.infoContainer}>
@@ -130,7 +136,12 @@ const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
                         <div className={s.totalEmpty}>Корзина пуста</div>
                 }
             </div>
+
+            <button className={s.closeButton}>
+                <FontAwesomeIcon icon={faXmark} onClick={handleOnClose}/>
+            </button>
         </div>
+
     </div>);
 };
 
