@@ -6,6 +6,7 @@ import {reservationActions} from "@app/Store/config/slices/reservationSlice.ts";
 import Button from "@shared/ui/Button/Button.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {reservePlaces} from "@shared/API/CinemaOrdersService.ts";
 
 interface PopupBuyTicketsProps {
     className?: string;
@@ -49,6 +50,8 @@ function formatPlacesCount(num: number) {
     }
 }
 
+
+
 const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
     const {
         selectedScreeningInfo,
@@ -61,6 +64,7 @@ const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
     } = useAppSelector(state => state.reservation)
     const {selectedCinema} = useAppSelector(state => state.cinema);
     const dispatch = useAppDispatch();
+    const {userData, machineId, sessionId} = useAppSelector(state => state.user);
 
     if (!selectedScreening || !selectedScreeningInfo || !selectedMovie || !selectedCinema) return null;
 
@@ -70,6 +74,12 @@ const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
 
     function handleOnClose() {
         dispatch(reservationActions.unselectScreening());
+    }
+
+    function handleBuyTickets() {
+        reservePlaces(selectedScreening?.screening_id || '', selectedPlaces, userData?.email || '', sessionId, machineId).then((res) => {
+            console.log(res)
+        });
     }
 
     const {places, totalRows, totalColumns} = formatPlaces(selectedScreeningInfo.hall_configuration.place);
@@ -130,7 +140,7 @@ const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
                                 {error && <div className={s.totalError}>{error}</div>}
                                 <div className={s.totalCount}>{formatPlacesCount(selectedPlaces.length)}</div>
                                 <div className={s.totalPrice}>{totalPrice} ₽</div>
-                                <Button style={"accent"} className={s.nextButton}>Далее</Button>
+                                <Button style={"accent"} className={s.nextButton} onClick={handleBuyTickets}>Далее</Button>
                             </div>
                         ) :
                         <div className={s.totalEmpty}>Корзина пуста</div>

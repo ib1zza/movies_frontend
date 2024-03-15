@@ -24,15 +24,6 @@
   }
 
 
-  export interface Root {
-    screening_id: string
-    movie_id: number
-    screening_type: string
-    start_time: StartTime
-    hall_id: number
-    ticket_price: TicketPrice
-  }
-
   export interface StartTime {
     formatted_timestamp: string
   }
@@ -95,4 +86,12 @@
   export interface PlaceWithCoords extends Place {
     gridPosX: number
     gridPosY: number
+  }
+
+
+  export interface User {
+    username: string
+    email: string
+    profile_picture_url: string
+    registration_date: string
   }

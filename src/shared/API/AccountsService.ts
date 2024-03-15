@@ -32,19 +32,23 @@ const verifyEmail = async (email: string): Promise<boolean> => {
     return res;
 }
 
-const signIn = async (email: string, password: string, ip: string) => {
-    if (!localStorage.getItem("X-Machine-Id")) {
-        localStorage.setItem("X-Machine-Id", uuid());
+interface signInResponse {
+    session_id: string
+}
+
+const signIn = async (email: string, password: string, ip: string): Promise<signInResponse> => {
+    if (!localStorage.getItem("machineId")) {
+        localStorage.setItem("machineId", uuid());
     }
 
-    const res = await accountsApi.post<any>("/sign-in", {
+    const res = await accountsApi.post<signInResponse>("/sign-in", {
         email,
         password,
         client_ip: ip
 
     }, {
         headers: {
-            "X-Machine-Id": localStorage.getItem("X-Machine-Id"),
+            "X-Machine-Id": localStorage.getItem("machineId"),
         }
     })
 

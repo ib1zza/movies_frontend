@@ -31,8 +31,8 @@ const Login = ({className} : LoginProps) => {
     useEffect(() => {
         fetch('https://www.cloudflare.com/cdn-cgi/trace').then(data => data.text()).then(data => {
             const ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
-            const ip = data.match(ipRegex)[0];
-            api.current = ip;
+            const ip = data.match(ipRegex)?.[0];
+            api.current = ip || '127.0.0.1';
             console.log(ip);
         });
     }, [])
@@ -41,6 +41,7 @@ const Login = ({className} : LoginProps) => {
     async function onLogin (data: LoginData) {
         const res = await signIn(data.email, data.password, api.current);
 
+        localStorage.setItem("sessionId", res.session_id);
 
         console.log(res);
 

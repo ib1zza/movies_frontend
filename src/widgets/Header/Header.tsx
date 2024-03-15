@@ -7,9 +7,25 @@ import {useNavigate} from "react-router-dom";
 import {AppRoutes} from "@app/AppRouter/AppRoutes.ts";
 import {Wrapper} from "@shared/ui/Wrapper/Wrapper.tsx";
 import {BurgerMenu} from "@/widgets/BurgerMenu/BurgerMenu.tsx";
+import {useAppSelector} from "@app/Store/config/store.ts";
+
+const HeaderButton = () => {
+    const {userData} = useAppSelector(state => state.user)
+    const navigate = useNavigate()
+
+    if (userData) {
+        return <Button style={"accent"} onClick={() => {} }>
+            Личный кабинет
+        </Button>
+    }
+    return <Button style={"accent"} onClick={() => navigate(AppRoutes.LOGIN)}>
+        Вход
+    </Button>
+}
 
 const Header = () => {
     const navigate = useNavigate()
+
     return (
         <Wrapper className={s.header}>
             <div className={s.logo} onClick={() => navigate(AppRoutes.HOMEPAGE)}>
@@ -20,16 +36,12 @@ const Header = () => {
             </div>
             <div className={s.rightButtons}>
                 <ThemeSwitcher/>
-                <Button style={"accent"} onClick={() => navigate(AppRoutes.REGISTER)}>
-                    Личный кабинет
-                </Button>
+                <HeaderButton/>
             </div>
             <BurgerMenu>
                 <div className={s.burgerContent}>
                     <ThemeSwitcher/>
-                    <Button style={"accent"}>
-                        Личный кабинет
-                    </Button>
+                    <HeaderButton/>
                 </div>
             </BurgerMenu>
         </Wrapper>

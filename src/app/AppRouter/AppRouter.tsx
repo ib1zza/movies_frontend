@@ -5,6 +5,7 @@ import {Cinemapage} from "@/pages/Cinemapage/Cinemapage";
 import {MoviepageByCinema} from "@pages/MoviepageByCinema/MoviepageByCinema.tsx";
 import {Login} from "@pages/Auth/Login/Login.tsx";
 import {Register} from "@pages/Auth/Register/Register.tsx";
+import ProtectedRoute from "@app/components/ProtectedRoute.tsx";
 
 const RoutesConfig = [
     {
@@ -21,11 +22,17 @@ const RoutesConfig = [
     },
     {
         path: AppRoutes.LOGIN,
-        element: <Login/>
+        element:
+            <ProtectedRoute>
+                <Login/>
+            </ProtectedRoute>
     },
     {
         path: AppRoutes.REGISTER,
-        element: <Register/>
+        element:
+            <ProtectedRoute>
+                <Register/>
+            </ProtectedRoute>
     },
     {
         path: "*",
