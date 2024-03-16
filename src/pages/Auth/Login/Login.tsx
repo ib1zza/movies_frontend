@@ -1,7 +1,7 @@
 import s from "../Auth.module.scss"   ;
 import {classNames} from "@shared/lib/classNames.ts";
 import {useForm} from "react-hook-form";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {AppRoutes} from "@app/AppRouter/AppRoutes.ts";
 import {Input} from "@shared/ui/Input/Input.tsx";
 import {useEffect, useRef} from "react";
@@ -37,11 +37,14 @@ const Login = ({className} : LoginProps) => {
         });
     }, [])
 
+    const navigate = useNavigate()
 
     async function onLogin (data: LoginData) {
         const res = await signIn(data.email, data.password, api.current);
 
         localStorage.setItem("sessionId", res.session_id);
+
+        navigate(AppRoutes.HOMEPAGE, {replace: true});
 
         console.log(res);
 

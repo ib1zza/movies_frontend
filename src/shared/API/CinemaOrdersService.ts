@@ -1,6 +1,7 @@
 import axios from "axios";
 import {baseUrl} from "./API.ts";
 import {Place} from "@shared/types/types.ts";
+import { ProcessOrderData } from "@shared/types/types.ts";
 
 const cinemaOrdersServiceBaseUrl = baseUrl + "/orders-service";
 
@@ -22,27 +23,35 @@ interface reservePlaceResponse {
     time_to_pay: number
 }
 
-interface processReservationResponse {
-    payment_url: string
-}
+type processReservationResponse = ProcessOrderData;
 
-const reservePlaces = async (screeningId: number | string, places: Place[], email: string, sessionId: string, machineId: string): Promise<processReservationResponse> => {
+const reservePlaces = async (screeningId: number | string, places: Place[], email: string, sessionId: string, machineId: string): Promise<processReservationResponse | null> => {
     const res1 = await cinemaOrdersApi.post<reservePlaceResponse>(`screening/${screeningId}/reserve`, {
         places,
     });
 
     const {reserve_id} = res1.data;
 
-    const res2 = await cinemaOrdersApi.post<processReservationResponse>(`/reservation/${reserve_id}/process`, {
-        email,
-    }, {
-        params: {
-            "X-Session-Id": sessionId,
-            "X-Machine-Id": machineId,
-        }
-    });
+    let counter = 0;
 
-    return res2.data;
+    while (counter < 5) {
+        try {
+            const res2 = await cinemaOrdersApi.post<processReservationResponse>(`/reservation/${reserve_id}/process`, {
+                email,
+            }, {
+                headers: {
+                    "X-Session-Id": sessionId,
+                    "X-Machine-Id": machineId,
+                }
+            });
+            return res2.data;
+        } catch (e) {
+            counter++;
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+    }
+
+    return null;
 }
 
 export {getScreeningOccupiedPlaces, reservePlaces}

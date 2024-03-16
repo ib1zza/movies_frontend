@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {HallConfiguration, MovieDescriptionShort, Place, Screening, ScreeningInfo} from "@shared/types/types.ts";
+import {HallConfiguration,ProcessOrderData, MovieDescriptionShort, Place, Screening, ScreeningInfo} from "@shared/types/types.ts";
 
 interface ReservationSchema {
     isLoading: boolean;
@@ -11,6 +11,7 @@ interface ReservationSchema {
     selectedMovie: MovieDescriptionShort | null;
     selectedPlaces: Place[];
     totalPrice: number;
+    orderProcessData: ProcessOrderData | null;
 }
 
 const initialState: ReservationSchema = {
@@ -22,7 +23,8 @@ const initialState: ReservationSchema = {
     occupiedSeats: [],
     selectedPlaces: [],
     selectedMovie: null,
-    totalPrice: 0
+    totalPrice: 0,
+    orderProcessData: null
 };
 
 
@@ -77,7 +79,12 @@ export const reservationSlice = createSlice({
             state.selectedMovie = null;
             state.selectedPlaces = [];
             state.totalPrice = 0;
-        }
+        },
+        setOrderProcessData: (state, action: PayloadAction<ProcessOrderData>) => {
+            state.orderProcessData = action.payload;
+        },
+
+
     },
 });
 

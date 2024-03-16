@@ -95,3 +95,8 @@
     profile_picture_url: string
     registration_date: string
   }
+
+  export interface ProcessOrderData {
+      payment_url: string,
+      reserve_id: string;
+  }
