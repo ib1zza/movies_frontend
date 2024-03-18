@@ -7,6 +7,7 @@ import {getScreeningOccupiedPlaces} from "@shared/API/CinemaOrdersService.ts";
 import {useAppDispatch} from "@app/Store/config/store.ts";
 import {screeningsActions} from "@app/Store/config/slices/screeningsSlice.ts";
 import {reservationActions} from "@app/Store/config/slices/reservationSlice.ts";
+import {formatPrice} from "@shared/lib/format.ts";
 
 interface ScreeningButtonProps {
     className?: string
@@ -19,10 +20,6 @@ function formatTime(time: string) {
     return `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`
 }
 
-function formatPrice(price: number) {
-    const rub = price.toString().slice(0, -2);
-    return `${rub} ₽`
-}
 
 const ScreeningButton = ({className, screening, movie}: ScreeningButtonProps) => {
     const dispatch = useAppDispatch()

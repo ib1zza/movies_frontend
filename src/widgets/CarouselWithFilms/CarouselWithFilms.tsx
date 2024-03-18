@@ -11,8 +11,6 @@ interface CarouselWithFilmsProps {
 }
 
 const settings: Settings = {
-    infinite: false,
-    speed: 500,
     slidesToShow: 5,
     slidesToScroll: 2,
     rows: 1,
@@ -21,13 +19,14 @@ const settings: Settings = {
     dots: false,
     arrows: false,
     cssEase: "linear",
+    // adaptiveHeight: true,
 
     responsive: [
         {
             breakpoint: 1100,
             settings: {
                 slidesToShow: 4,
-                slidesToScroll: 1,
+                slidesToScroll: 2,
             },
         },
         {
@@ -40,13 +39,17 @@ const settings: Settings = {
         {
             breakpoint: 700,
             settings: {
-                // initialSlide: 0,
-                // slidesPerRow: 2,
-                // rows: 1,
                 slidesToShow: 2,
                 slidesToScroll: 1,
             },
         },
+        {
+            breakpoint: 460,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            },
+        }
     ],
 
 

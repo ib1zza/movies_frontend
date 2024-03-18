@@ -1,6 +1,6 @@
 import axios from "axios";
 import {baseUrl} from "./API.ts";
-import {Place} from "@shared/types/types.ts";
+import {OrderInfo, Place} from "@shared/types/types.ts";
 import { ProcessOrderData } from "@shared/types/types.ts";
 
 const cinemaOrdersServiceBaseUrl = baseUrl + "/orders-service";
@@ -38,12 +38,7 @@ const reservePlaces = async (screeningId: number | string, places: Place[], emai
         try {
             const res2 = await cinemaOrdersApi.post<processReservationResponse>(`/reservation/${reserve_id}/process`, {
                 email,
-            }, {
-                headers: {
-                    "X-Session-Id": sessionId,
-                    "X-Machine-Id": machineId,
-                }
-            });
+            }, );
             return res2.data;
         } catch (e) {
             counter++;
@@ -54,4 +49,23 @@ const reservePlaces = async (screeningId: number | string, places: Place[], emai
     return null;
 }
 
-export {getScreeningOccupiedPlaces, reservePlaces}
+interface getOrdersResponse {
+    orders: OrderInfo[];
+}
+
+const getOrders = async ( sessionId: string, machineId: string, page: number = 1, limit: number = 10) =>  {
+    const res = await cinemaOrdersApi.get<getOrdersResponse>("/orders", {
+        headers: {
+            "X-Session-Id": sessionId,
+            "X-Machine-Id": machineId,
+        },
+        params: {
+            page,
+            limit,
+        }
+    })
+
+    return res.data.orders;
+}
+
+export {getScreeningOccupiedPlaces, reservePlaces, getOrders}

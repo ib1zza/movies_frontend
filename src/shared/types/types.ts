@@ -100,3 +100,19 @@
       payment_url: string,
       reserve_id: string;
   }
+
+
+  export interface OrderInfo {
+    order_id: string
+    order_date: OrderDate
+    total_price: TotalPrice
+    screening_id: string
+  }
+
+  export interface OrderDate {
+    formatted_timestamp: string
+  }
+
+  export interface TotalPrice {
+    value: number
+  }

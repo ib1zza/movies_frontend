@@ -14,7 +14,7 @@ const HeaderButton = () => {
     const navigate = useNavigate()
 
     if (userData) {
-        return <Button style={"accent"} onClick={() => {} }>
+        return <Button style={"accent"} onClick={() => navigate(AppRoutes.ACCOUNT) }>
             Личный кабинет
         </Button>
     }

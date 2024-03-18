@@ -28,6 +28,7 @@ const initialState: ReservationSchema = {
 };
 
 
+
 export const reservationSlice = createSlice({
     name: 'reservation',
     initialState,
@@ -49,7 +50,6 @@ export const reservationSlice = createSlice({
             state.hallConfiguration = action.payload;
         },
         selectPlace: (state, action: PayloadAction<Place>) => {
-
             const selectedPlace = action.payload;
 
             const isAlreadySelected = state.selectedPlaces.find(el => selectedPlace.seat === el.seat && selectedPlace.row === el.row);

@@ -11,6 +11,7 @@ import {
     formatPlaces,
     formatPlacesCount
 } from "./utils/format";
+import {formatPrice} from "@shared/lib/format.ts";
 
 interface PopupBuyTicketsProps {
     className?: string;
@@ -109,7 +110,7 @@ const SecondStep = ({orderProcessData}: SecondStepProps) => {
         selectedScreeningInfo
     } = useAppSelector(state => state.reservation)
 
-    const price = Math.round((selectedScreeningInfo?.ticket_price.value || 10000) / 100);
+    const price =  formatPrice(selectedScreeningInfo?.ticket_price.value || 10000);
 
     const date = new Date(selectedScreeningInfo?.start_time.formatted_timestamp || '');
     function formatTime() {
@@ -138,7 +139,7 @@ const SecondStep = ({orderProcessData}: SecondStepProps) => {
                             Ряд {place.row} Место {place.seat}
                         </div>
                         <div>
-                            Стандартный тариф {price} ₽
+                            Стандартный тариф {price}
                         </div>
                     </li>
                 ))}
@@ -165,7 +166,7 @@ const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
     const dispatch = useAppDispatch();
 
     if (!selectedScreening || !selectedScreeningInfo || !selectedMovie || !selectedCinema) return null;
-    
+
     function handleOnClose() {
         dispatch(reservationActions.unselectScreening());
     }

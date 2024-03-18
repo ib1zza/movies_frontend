@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import {User} from "@shared/types/types.ts";
+import {User, OrderInfo, ScreeningInfo} from "@shared/types/types.ts";
 
 interface UserSchema {
     userData: User | null;
@@ -7,6 +7,7 @@ interface UserSchema {
     error: string;
     sessionId: string;
     machineId: string;
+    ordersHistory: OrderInfo[]
 }
 
 const initialState: UserSchema = {
@@ -15,6 +16,7 @@ const initialState: UserSchema = {
     userData: null,
     sessionId: localStorage.getItem("sessionId") || '',
     machineId: localStorage.getItem("machineId") || '',
+    ordersHistory: []
 };
 
 
@@ -35,7 +37,15 @@ export const userSlice = createSlice({
         setMachineId: (state, action: PayloadAction<string>) => {
             state.machineId = action.payload;
         },
-
+        setOrdersHistory: (state, action: PayloadAction<OrderInfo[]>) => {
+            state.ordersHistory = action.payload;
+        },
+        logout: (state) => {
+            state.userData = null;
+            state.sessionId = '';
+            state.machineId = '';
+            state.ordersHistory = [];
+        },
     },
 });
 

@@ -6,6 +6,7 @@ import {MoviepageByCinema} from "@pages/MoviepageByCinema/MoviepageByCinema.tsx"
 import {Login} from "@pages/Auth/Login/Login.tsx";
 import {Register} from "@pages/Auth/Register/Register.tsx";
 import ProtectedRoute from "@app/components/ProtectedRoute.tsx";
+import {AccountPage} from "@pages/AccountPage/AccountPage.tsx";
 
 const RoutesConfig = [
     {
@@ -32,6 +33,13 @@ const RoutesConfig = [
         element:
             <ProtectedRoute>
                 <Register/>
+            </ProtectedRoute>
+    },
+    {
+        path: AppRoutes.ACCOUNT,
+        element:
+            <ProtectedRoute needAuth>
+                <AccountPage/>
             </ProtectedRoute>
     },
     {
