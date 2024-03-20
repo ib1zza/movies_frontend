@@ -6,6 +6,8 @@ import {AppRoutes} from "@app/AppRouter/AppRoutes.ts";
 import {Input} from "@shared/ui/Input/Input.tsx";
 import {useEffect, useRef} from "react";
 import {signIn} from "@shared/API/AccountsService.ts";
+import {useAppDispatch} from "@app/Store/config/store.ts";
+import {userActions} from "@app/Store/config/slices/userSlice.ts";
 
 interface LoginProps {
     className?: string
@@ -28,6 +30,8 @@ const Login = ({className} : LoginProps) => {
         }
     });
 
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
         fetch('https://www.cloudflare.com/cdn-cgi/trace').then(data => data.text()).then(data => {
             const ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
@@ -45,9 +49,8 @@ const Login = ({className} : LoginProps) => {
         localStorage.setItem("sessionId", res.session_id);
 
         navigate(AppRoutes.HOMEPAGE, {replace: true});
-
+        dispatch(userActions.setSessionId(res.session_id))
         console.log(res);
-
     }
 
     return (

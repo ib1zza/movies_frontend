@@ -38,7 +38,13 @@ const reservePlaces = async (screeningId: number | string, places: Place[], emai
         try {
             const res2 = await cinemaOrdersApi.post<processReservationResponse>(`/reservation/${reserve_id}/process`, {
                 email,
-            }, );
+            },
+                {
+                    headers: {
+                        "X-Session-Id": sessionId,
+                        "X-Machine-Id": machineId,
+                    }
+                });
             return res2.data;
         } catch (e) {
             counter++;

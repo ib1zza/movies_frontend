@@ -55,4 +55,15 @@ const signIn = async (email: string, password: string, ip: string): Promise<sign
     return res.data;
 }
 
-export {signUp, verifyEmail, signIn};
+const signOut = async (sessionId: string, machineId: string) => {
+    const res = await accountsApi.post<any>("/logout", {}, {
+        headers: {
+            "X-Session-Id": sessionId,
+            "X-Machine-Id": machineId
+        }
+    });
+
+    return res.data;
+}
+
+export {signUp, verifyEmail, signIn, signOut};
