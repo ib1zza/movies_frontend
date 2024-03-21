@@ -1,14 +1,13 @@
 import s from "./OrdersHistory.module.scss";
 import {classNames} from "@shared/lib/classNames.ts";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {getOrders} from "@shared/API/CinemaOrdersService.ts";
-import {OrderInfo, ScreeningInfo} from "@shared/types/types.ts";
 import {useAppDispatch, useAppSelector} from "@app/Store/config/store.ts";
-import {reservationActions} from "@app/Store/config/slices/reservationSlice.ts";
 import {userActions} from "@app/Store/config/slices/userSlice.ts";
 import {formatPrice} from "@shared/lib/format.ts";
 import {faClockRotateLeft} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Text} from "@shared/ui/Text/Text.tsx";
 
 interface OrdersHistoryProps {
     className?: string,
@@ -33,19 +32,20 @@ const OrdersHistory = ({sessionId, machineId, className}: OrdersHistoryProps) =>
 
     useEffect(() => {
         getOrders(sessionId, machineId).then(data => {
-          dispatch(userActions.setOrdersHistory(data))
+            dispatch(userActions.setOrdersHistory(data))
         })
     }, [machineId, sessionId])
 
-    const getTimeString =( s: string) => {
+    const getTimeString = (s: string) => {
         return `${formatDate(s)} ${formatTime(s)} `
     }
 
     return (
         <div className={classNames(s.OrdersHistory, {}, [className])}>
-            <h2 className={s.title}>
-                <FontAwesomeIcon icon={faClockRotateLeft} />
-                История заказов</h2>
+            <Text size={"M"} bold className={s.title}>
+                <FontAwesomeIcon icon={faClockRotateLeft}/>
+                История заказов
+            </Text>
             <div className={s.ordersContainer}>
                 {
                     data.length === 0 && <h5 className={s.noOrders}>Вы еще не сделали ни одного заказа</h5>

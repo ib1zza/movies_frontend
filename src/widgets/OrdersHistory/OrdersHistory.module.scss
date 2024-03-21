@@ -2,10 +2,30 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 
   .orderItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
+
+    h5 {
+      font-weight: 600;
+      flex-basis: 220px;
+    }
+    & > * {
+      font-size: 16px;
+    }
+
+    @media (max-width: 390px) {
+      flex-direction: column;
+      gap: 0px;
+      align-items: flex-start;
+      h5 {
+        flex-basis: auto;
+      }
+    }
   }
 }
 
@@ -14,6 +34,5 @@
 
   svg {
     margin-right: 5px;
-    font-size: 16px;
   }
 }
