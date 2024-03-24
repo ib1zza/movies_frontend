@@ -20,7 +20,6 @@ const MovieInfo = ({className, movieInfo} : MovieInfoProps) => {
             <img src={movieInfo.posterUrl} alt=""/>
 
             <div className={s.info}>
-
                 <div className={s.top}>
                     <h1 className={s.title}>{movieInfo.titleRu} </h1>
                     <div className={s.ageRating}>{movieInfo.ageRating}</div>
@@ -30,13 +29,9 @@ const MovieInfo = ({className, movieInfo} : MovieInfoProps) => {
                     <div><Text size={"M"} bold>Длительность:</Text> {formatDuration(movieInfo.duration)}</div>
                     <div><Text size={"M"} bold>Страна:</Text> {movieInfo.countries.join(", ")}</div>
                 </div>
-                <div className={s.description}><Text size={"M"} bold>Описание:</Text> {movieInfo.description}</div>
-
-                <Button className={s.buy} >
-                    <Text size={"M"} bold>Купить билет</Text>
-                 </Button>
             </div>
 
+            <div className={s.description}><Text size={"M"} bold>Описание:</Text> {movieInfo.description}</div>
         </div>
     );
 };
