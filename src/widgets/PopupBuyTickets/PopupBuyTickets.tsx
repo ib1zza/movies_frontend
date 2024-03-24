@@ -1,7 +1,7 @@
 import s from "./PopupBuyTickets.module.scss";
 import {classNames} from "@shared/lib/classNames.ts";
 import {useAppDispatch, useAppSelector} from "@app/Store/config/store.ts";
-import {HallConfiguration, PlaceWithCoords, Screening, ProcessOrderData, ScreeningInfo} from "@shared/types/types.ts";
+import {HallConfiguration, PlaceWithCoords, Screening, ProcessOrderData} from "@shared/types/types.ts";
 import {reservationActions} from "@app/Store/config/slices/reservationSlice.ts";
 import Button from "@shared/ui/Button/Button.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -12,6 +12,7 @@ import {
     formatPlacesCount
 } from "./utils/format";
 import {formatPrice} from "@shared/lib/format.ts";
+import { useEffect } from "react";
 
 interface PopupBuyTicketsProps {
     className?: string;
@@ -103,10 +104,8 @@ interface SecondStepProps {
 
 const SecondStep = ({orderProcessData}: SecondStepProps) => {
     const {
-        occupiedSeats,
         selectedPlaces,
         totalPrice,
-        error,
         selectedScreeningInfo
     } = useAppSelector(state => state.reservation)
 
@@ -114,12 +113,10 @@ const SecondStep = ({orderProcessData}: SecondStepProps) => {
 
     const date = new Date(selectedScreeningInfo?.start_time.formatted_timestamp || '');
     function formatTime() {
-        // const date = new Date(date);
         return `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`
     }
 
     function formatDate() {
-        // const date = new Date(date);
         return `${date.getDate().toString().padStart(2, "0")}.${(date.getMonth() + 1).toString().padStart(2, "0")}.${date.getFullYear()}`
     }
 
@@ -165,12 +162,18 @@ const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
 
     const dispatch = useAppDispatch();
 
-    if (!selectedScreening || !selectedScreeningInfo || !selectedMovie || !selectedCinema) return null;
+    useEffect(() => {
+        return () => {
+            dispatch(reservationActions.unselectScreening());
+        }
+    }, [])
 
     function handleOnClose() {
         dispatch(reservationActions.unselectScreening());
     }
 
+    if (!selectedScreening || !selectedScreeningInfo || !selectedMovie || !selectedCinema) return null;
+    
     return (<div className={classNames(s.PopupBuyTickets, {}, [className])} onClick={handleOnClose}>
         <div className={s.content} onClick={e => e.stopPropagation()}>
             <div className={s.filmInfo}>
@@ -191,7 +194,7 @@ const PopupBuyTickets = ({className}: PopupBuyTicketsProps) => {
                 </div>
             </div>
 
-            {!orderProcessData &&<FirstStep hallConfiguration={selectedScreeningInfo.hall_configuration} selectedScreening={selectedScreening} />}
+            {!orderProcessData && <FirstStep hallConfiguration={selectedScreeningInfo.hall_configuration} selectedScreening={selectedScreening} />}
 
             {orderProcessData && <SecondStep orderProcessData={orderProcessData}/>}
 

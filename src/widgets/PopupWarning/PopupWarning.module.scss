@@ -1,0 +1,36 @@
+.PopupWarning {
+    position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+
+  .content {
+    min-width: 280px;
+    padding: 20px;
+    border-radius: 20px;
+    background: var(--bgColor);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    .closeButton {
+      position: absolute;
+      right: 0px;
+      top: 0;
+      font-size: 20px;
+      padding: 10px;
+    }
+  }
+}
+
+.children {
+    margin-top: 20px;
+}

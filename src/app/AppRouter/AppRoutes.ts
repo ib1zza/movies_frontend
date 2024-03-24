@@ -3,5 +3,6 @@ export const enum AppRoutes {
     "CINEMA" = "/cinema",
     "LOGIN" = "/login",
     "REGISTER" = "/register",
-    "ACCOUNT" = "/account"
+    "ACCOUNT" = "/account",
+    "MOVIE" = "/movie",
 }

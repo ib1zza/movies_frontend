@@ -1,0 +1,40 @@
+.MovieInfo {
+  display: flex;
+  gap: 15px;
+
+  img {
+    border-radius: 20px;
+    max-width: 320px;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .ageRating {
+    font-size: 16px;
+    font-weight: 600;
+    background: var(--bgAccent);
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+}
+
+.buy {
+  align-self: flex-start;
+  margin-top: 30px;
+}
+
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+}

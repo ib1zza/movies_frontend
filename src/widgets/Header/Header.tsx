@@ -45,7 +45,7 @@ const Header = () => {
                 </div>
             </BurgerMenu>
         </Wrapper>
-);
+    );
 };
 
 export default Header;

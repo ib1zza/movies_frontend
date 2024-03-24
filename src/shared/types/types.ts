@@ -46,6 +46,21 @@
     id: string
   }
 
+  export interface MovieDescription {
+    id:            string;
+    description:   string;
+    titleRu:       string;
+    titleEn:       string;
+    genres:        string[];
+    duration:      number;
+    countries:     string[];
+    posterUrl:     string;
+    backgroundUrl: string;
+    releaseYear:   number;
+    ageRating:     string;
+  }
+
+
 
   export interface City {
     city_id: number

@@ -43,6 +43,8 @@ function App() {
             </Wrapper>
 
             <PopupBuyTickets/>
+
+
         </div>
     )
 }

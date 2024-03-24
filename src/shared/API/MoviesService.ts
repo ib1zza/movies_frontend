@@ -1,5 +1,5 @@
 import axios from "axios";
-import {MovieDescriptionShort} from "@shared/types/types.ts";
+import {MovieDescription, MovieDescriptionShort} from "@shared/types/types.ts";
 import {baseUrl} from "@shared/API/API.ts";
 
 
@@ -13,6 +13,22 @@ type MovieDescriptionShortFromServer = Omit<MovieDescriptionShort,"id">
 
 interface getMoviesInfoResponse {
     movies: Record<string, MovieDescriptionShortFromServer>;
+}
+
+type MovieInfoFromServer = Omit<MovieDescription, "id">
+
+async function getMovieInfo (movieId: string): Promise<MovieDescription> {
+
+     const res =  await moviesApi.get<MovieInfoFromServer>("/movie/"+movieId, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        params: {
+            "movie_id": movieId
+        }
+    }).then(response => response.data)
+
+    return Object.assign(res, {id: movieId});
 }
 
 const getMoviesInfoShort = async (ids: string[] = []): Promise<MovieDescriptionShort[]> => {
@@ -34,4 +50,4 @@ const getMoviesInfoShort = async (ids: string[] = []): Promise<MovieDescriptionS
     return transformResponce(res)
 }
 
-export {getMoviesInfoShort}
+export {getMovieInfo, getMoviesInfoShort}

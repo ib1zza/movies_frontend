@@ -20,7 +20,6 @@ const MovieWithScreenings = ({className, movie, cinemaId} : MovieWithScreeningsP
         getScreeningsByMovieByCinema(cinemaId, movie.id).then(setScreenings);
     }, []);
 
-    console.log(screenings)
 
 
     return (

@@ -11,13 +11,29 @@ interface CinemaSchema {
     selectedCinema: Cinema | null;
 }
 
+const initSelelectedCity = () => {
+    const selectedCity = localStorage.getItem('selectedCity');
+    if (selectedCity) {
+        return JSON.parse(selectedCity);
+    }
+    return null;
+}
+
+const initSelelectedCinema = () => {
+    const selectedCinema = localStorage.getItem('selectedCinema');
+    if (selectedCinema) {
+        return JSON.parse(selectedCinema);
+    }
+    return null;
+}
+
 const initialState: CinemaSchema = {
     isLoading: false,
     error: '',
     allCities: [],
     cinemasByCity: {},
-    selectedCity: null,
-    selectedCinema: null
+    selectedCity: initSelelectedCity(),
+    selectedCinema: initSelelectedCinema()
 };
 
 
@@ -36,6 +52,7 @@ export const cinemaSlice = createSlice({
             if (state.selectedCity?.city_id === action.payload?.city_id) {
                 return;
             }
+            localStorage.setItem('selectedCity', JSON.stringify(action.payload));
             state.selectedCity = action.payload;
         },
         setCinemasByCity: (state, action: PayloadAction<Record<string, Cinema[]>>) => {
@@ -45,6 +62,7 @@ export const cinemaSlice = createSlice({
             if (state.selectedCinema?.cinema_id === action.payload?.cinema_id) {
                 return;
             }
+            localStorage.setItem('selectedCinema', JSON.stringify(action.payload));
             state.selectedCinema = action.payload;
         },
 
